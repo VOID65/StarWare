@@ -21,11 +21,11 @@ local StarWare_Lib = {
 	Flags = {},
 	Themes = {
 		Default = {
-			Main = Color3.fromRGB(25, 25, 25),
-			Second = Color3.fromRGB(32, 32, 32),
-			Stroke = Color3.fromRGB(60, 60, 60),
-			Divider = Color3.fromRGB(60, 60, 60),
-			Text = Color3.fromRGB(240, 240, 240),
+			Main     = Color3.fromRGB(25, 25, 25),
+			Second   = Color3.fromRGB(32, 32, 32),
+			Stroke   = Color3.fromRGB(60, 60, 60),
+			Divider  = Color3.fromRGB(60, 60, 60),
+			Text     = Color3.fromRGB(194, 126, 0),
 			TextDark = Color3.fromRGB(150, 150, 150)
 		}
 	},
@@ -574,7 +574,7 @@ function StarWare_Lib:MakeWindow(WindowConfig)
                 AddThemeObject(SetProps(MakeElement("Frame"), {
                     Size = UDim2.new(1, 0, 0, 1)
                 }), "Stroke"),
-                              
+
                 AddThemeObject(SetChildren(SetProps(MakeElement("Frame"), {
                     AnchorPoint = Vector2.new(0, 0.5),
                     Size = UDim2.new(0, 32, 0, 32),
