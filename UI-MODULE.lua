@@ -380,6 +380,7 @@ CreateElement("Label", function(Text, TextSize, Transparency)
 	return Label
 end)
 
+
 local NotificationHolder = SetProps(SetChildren(MakeElement("TFrame"), {
 	SetProps(MakeElement("List"), {
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -414,29 +415,32 @@ function StarWare_Lib:MakeNotification(NotificationConfig)
 			BackgroundTransparency = 0,
 			AutomaticSize = Enum.AutomaticSize.Y
 		}), {
-			MakeElement("Stroke", Color3.fromRGB(93, 93, 93), 1.2),
-			MakeElement("Padding", 12, 12, 12, 12),
-			SetProps(MakeElement("Image", NotificationConfig.Image), {
-				Size = UDim2.new(0, 20, 0, 20),
-				ImageColor3 = Color3.fromRGB(240, 240, 240),
-				Name = "Icon"
-			}),
-			SetProps(MakeElement("Label", NotificationConfig.Name, 15), {
-				Size = UDim2.new(1, -30, 0, 20),
-				Position = UDim2.new(0, 30, 0, 0),
-				Font = Enum.Font.GothamBold,
-				Name = "Title"
-			}),
-			SetProps(MakeElement("Label", NotificationConfig.Content, 14), {
-				Size = UDim2.new(1, 0, 0, 0),
-				Position = UDim2.new(0, 0, 0, 25),
-				Font = Enum.Font.GothamSemibold,
-				Name = "Content",
-				AutomaticSize = Enum.AutomaticSize.Y,
-				TextColor3 = Color3.fromRGB(200, 200, 200),
-				TextWrapped = true
-			})
-		})
+				MakeElement("Stroke", Color3.fromRGB(93, 93, 93), 1.2),
+				MakeElement("Padding", 12, 12, 12, 12),
+
+				SetProps(MakeElement("Image", NotificationConfig.Image), {
+					Size = UDim2.new(0, 20, 0, 20);
+					ImageColor3 = Color3.fromRGB(240, 240, 240);
+					Name = "Icon";
+				});
+				SetProps(MakeElement("Label", NotificationConfig.Name, 15), {
+					Size = UDim2.new(1, -30, 0, 20);
+					Position = UDim2.new(0, 30, 0, 0);
+					Font = Enum.Font.GothamBold;
+					Name = "Title";
+					TextColor3 = Color3.fromRGB(249, 232, 0);
+				});
+				SetProps(MakeElement("Label", NotificationConfig.Content, 14), {
+					Size = UDim2.new(1, 0, 0, 0);
+					Position = UDim2.new(0, 0, 0, 25);
+					Font = Enum.Font.GothamSemibold;
+					Name = "Content";
+					AutomaticSize = Enum.AutomaticSize.Y;
+					TextColor3 = Color3.fromRGB(200, 200, 200);
+					TextWrapped = true;
+				});
+			}
+		)
 
 		TweenService:Create(NotificationFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(0, 0, 0, 0)}):Play()
 
@@ -460,6 +464,7 @@ function StarWare_Lib:MakeNotification(NotificationConfig)
 		NotificationFrame:Destroy()
 	end)
 end
+
 
 function StarWare_Lib:Init()
 	if StarWare_Lib.SaveCfg then	
@@ -495,8 +500,8 @@ function StarWare_Lib:MakeWindow(WindowConfig)
 	WindowConfig.IntroText     = Config.ScriptName
 	WindowConfig.CloseCallback = WindowConfig.CloseCallback or function() end
 	WindowConfig.ShowIcon      = false
-	WindowConfig.Icon          = WindowConfig.Icon      or "rbxassetid://8834748103"
-	WindowConfig.IntroIcon     = WindowConfig.IntroIcon or "rbxassetid://8834748103"
+	WindowConfig.Icon          = "rbxassetid://8834748103"
+	WindowConfig.IntroIcon     = "rbxassetid://8834748103"
 	StarWare_Lib.Folder        = WindowConfig.ConfigFolder
 	StarWare_Lib.SaveCfg       = WindowConfig.SaveConfig
 
