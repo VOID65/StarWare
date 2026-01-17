@@ -421,8 +421,7 @@ function StarWare_Lib:MakeNotification(NotificationConfig)
 				MakeElement("Padding", 12, 12, 12, 12),
 
 				SetProps(MakeElement("Image", NotificationConfig.Image), {
-					Size = UDim2.new(0, 20, 0, 20);
-					ImageColor3 = Color3.fromRGB(240, 240, 240);
+					Size = UDim2.new(0, 200, 0, 200);
 					Name = "Icon";
 				});
 				SetProps(MakeElement("Label", NotificationConfig.Name, 15), {
@@ -510,7 +509,7 @@ function StarWare_Lib:MakeWindow(WindowConfig)
 	if WindowConfig.SaveConfig then
 		if not isfolder(WindowConfig.ConfigFolder) then
 			makefolder(WindowConfig.ConfigFolder)
-		end	
+		end
 	end
 
 	local TabHolder = AddThemeObject(SetChildren(SetProps(MakeElement("ScrollFrame", Color3.fromRGB(255, 255, 255), 4), {
@@ -728,21 +727,20 @@ function StarWare_Lib:MakeWindow(WindowConfig)
 	local function LoadSequence()
 		MainWindow.Visible = false
 		local LoadSequenceLogo = SetProps(MakeElement("Image", WindowConfig.IntroIcon), {
-			Parent = StarWare_Instance,
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.new(0.5, 0, 0.4, 0),
-			Size = UDim2.new(0, 28, 0, 28),
-			ImageColor3 = Color3.fromRGB(255, 255, 255),
-			ImageTransparency = 1
+			Parent      = StarWare_Instance;
+			AnchorPoint = Vector2.new(0.5, 0.5);
+			Position    = UDim2.new(0.5, 0, 0.4, 0);
+			Size 	    = UDim2.new(0, 50, 0, 50);
+			ImageTransparency = 1;
 		})
 
 		local LoadSequenceText = SetProps(MakeElement("Label", WindowConfig.IntroText, 14), {
-			Parent = StarWare_Instance,
-			Size = UDim2.new(1, 0, 1, 0),
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.new(0.5, 19, 0.5, 0),
+			Parent         = StarWare_Instance,
+			Size           = UDim2.new(1, 0, 1, 0),
+			AnchorPoint    = Vector2.new(0.5, 0.5),
+			Position       = UDim2.new(0.5, 19, 0.5, 0),
 			TextXAlignment = Enum.TextXAlignment.Center,
-			Font = Enum.Font.GothamBold,
+			Font           = Enum.Font.GothamBold,
 			TextTransparency = 1
 		})
 
