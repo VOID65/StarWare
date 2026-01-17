@@ -730,7 +730,7 @@ function StarWare_Lib:MakeWindow(WindowConfig)
 			Parent      = StarWare_Instance;
 			AnchorPoint = Vector2.new(0.5, 0.5);
 			Position    = UDim2.new(0.5, 0, 0.4, 0);
-			Size 	    = UDim2.new(0, 50, 0, 50);
+			Size 	    = UDim2.new(0, 30, 0, 30);
 			ImageTransparency = 1;
 		})
 
