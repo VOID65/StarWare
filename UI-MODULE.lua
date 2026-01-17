@@ -9,7 +9,7 @@ local CoreGui          = game:GetService("CoreGui")
 
 local Config = {
     ScriptName = "StarWare";
-	ScriptLogo = "rbxassetid://85305180564490";
+	ScriptLogo = "rbxassetid://96986198351537";
     LibName    = "StarWare";
     LibPrefix  = "Star Ware Lib ";
     LibFolder  = "StarWare";
