@@ -6,13 +6,10 @@ local Mouse            = LocalPlayer:GetMouse()
 local HttpService      = game:GetService("HttpService")
 local CoreGui          = game:GetService("CoreGui")
 
-local MultiNameMap = {
-	AssetId = "rbxassetid://"
-}
 
 local Config = {
     ScriptName = "StarWare";
-	ScriptLogo = MultiNameMap.AssetId .. "85305180564490";
+	ScriptLogo = "rbxassetid://85305180564490";
     LibName    = "StarWare";
     LibPrefix  = "Star Ware Lib ";
     LibFolder  = "StarWare";
