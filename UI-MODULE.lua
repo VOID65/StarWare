@@ -6,8 +6,13 @@ local Mouse            = LocalPlayer:GetMouse()
 local HttpService      = game:GetService("HttpService")
 local CoreGui          = game:GetService("CoreGui")
 
+local MultiNameMap = {
+	AssetId = "rbxassetid://"
+}
+
 local Config = {
     ScriptName = "StarWare";
+	ScriptLogo = MultiNameMap.AssetId .. "81361158163803";
     LibName    = "StarWare";
     LibPrefix  = "Star Ware Lib ";
     LibFolder  = "StarWare";
@@ -399,7 +404,7 @@ function StarWare_Lib:MakeNotification(NotificationConfig)
 	task.spawn(function()
 		NotificationConfig.Name    = NotificationConfig.Name    or Config.ScriptName
 		NotificationConfig.Content = NotificationConfig.Content or "Test"
-		NotificationConfig.Image   = NotificationConfig.Image   or "rbxassetid://4384403532"
+		NotificationConfig.Image   = Config.ScriptLogo
 		NotificationConfig.Time    = NotificationConfig.Time    or 15
 
 		local NotificationParent = SetProps(MakeElement("TFrame"), {
