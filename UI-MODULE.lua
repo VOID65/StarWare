@@ -505,8 +505,8 @@ function StarWare_Lib:MakeWindow(WindowConfig)
 	WindowConfig.IntroText     = Config.ScriptName
 	WindowConfig.CloseCallback = WindowConfig.CloseCallback or function() end
 	WindowConfig.ShowIcon      = false
-	WindowConfig.Icon          = "rbxassetid://8834748103"
-	WindowConfig.IntroIcon     = "rbxassetid://8834748103"
+	WindowConfig.Icon          = Config.ScriptLogo
+	WindowConfig.IntroIcon     = Config.ScriptLogo
 	StarWare_Lib.Folder        = WindowConfig.ConfigFolder
 	StarWare_Lib.SaveCfg       = WindowConfig.SaveConfig
 
