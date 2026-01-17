@@ -12,7 +12,7 @@ local MultiNameMap = {
 
 local Config = {
     ScriptName = "StarWare";
-	ScriptLogo = MultiNameMap.AssetId .. "81361158163803";
+	ScriptLogo = MultiNameMap.AssetId .. "85305180564490";
     LibName    = "StarWare";
     LibPrefix  = "Star Ware Lib ";
     LibFolder  = "StarWare";
