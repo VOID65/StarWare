@@ -5,7 +5,7 @@ local LocalPlayer      = game:GetService("Players").LocalPlayer
 local Mouse            = LocalPlayer:GetMouse()
 local HttpService      = game:GetService("HttpService")
 local CoreGui          = game:GetService("CoreGui")
-
+local DevMode          = true
 
 local Config = {
     ScriptName = "StarWare";
@@ -13,17 +13,35 @@ local Config = {
     LibName    = "StarWare";
     LibPrefix  = "Star Ware Lib ";
     LibFolder  = "StarWare";
+
+	ColorSpace = {
+		Notify = {
+			BackGround = Color3.fromRGB(19, 19, 19);
+			Title      = Color3.fromRGB(215, 194, 0);
+			Content    = Color3.fromRGB(255, 240, 181);
+			Stroke     = Color3.fromRGB(198, 192, 0);
+		};
+	};
+
+	Notify = {
+		BackgroundTransparency = 0;
+		UseAcrilBlure          = false;
+
+		StrokeSize = 2;
+	};
+
 }
 
 
 local StarWare_Lib = {
-	Elements = {},
+	Elements     = {},
 	ThemeObjects = {},
-	Connections = {},
-	Flags = {},
+	Connections  = {},
+	Flags        = {},
+
 	Themes = {
 		Default = {
-			Main     = Color3.fromRGB(25, 25, 25),
+			Main     = Color3.fromRGB(18, 18, 18),
 			Second   = Color3.fromRGB(32, 32, 32),
 			Stroke   = Color3.fromRGB(60, 60, 60),
 			Divider  = Color3.fromRGB(60, 60, 60),
@@ -32,8 +50,8 @@ local StarWare_Lib = {
 		}
 	},
 	SelectedTheme = "Default",
-	Folder = nil,
-	SaveCfg = false
+	Folder        = nil,
+	SaveCfg       = false
 }
 
 local Icons = {}
@@ -399,8 +417,20 @@ local NotificationHolder = SetProps(SetChildren(MakeElement("TFrame"), {
 
 function StarWare_Lib:MakeNotification(NotificationConfig)
 	task.spawn(function()
-		NotificationConfig.Name    = NotificationConfig.Name    or Config.ScriptName
-		NotificationConfig.Content = NotificationConfig.Content or "Test"
+		if typeof(NotificationConfig) ~= "table" then
+			if typeof(NotificationConfig) == "string" then
+				NotificationConfig = { Content = NotificationConfig }
+			else
+				return
+			end
+		end
+
+		if NotificationConfig.Name then
+			NotificationConfig.Name = "[ " .. NotificationConfig.Name .. " ]"
+		end
+
+		NotificationConfig.Name    = NotificationConfig.Name    or "[ " .. Config.ScriptName .. " ]"
+		NotificationConfig.Content = NotificationConfig.Content or "Hello, World!"
 		NotificationConfig.Image   = Config.ScriptLogo
 		NotificationConfig.Time    = NotificationConfig.Time    or 15
 
@@ -410,35 +440,49 @@ function StarWare_Lib:MakeNotification(NotificationConfig)
 			Parent = NotificationHolder
 		})
 
-		local NotificationFrame = SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(25, 25, 25), 0, 10), {
-			Parent = NotificationParent, 
-			Size = UDim2.new(1, 0, 0, 0),
-			Position = UDim2.new(1, -55, 0, 0),
-			BackgroundTransparency = 0,
-			AutomaticSize = Enum.AutomaticSize.Y
+		local NotificationFrame = SetChildren(SetProps(MakeElement("RoundFrame", Config.ColorSpace.Notify.BackGround, 0, 10), {
+			Parent                 = NotificationParent,
+			Size                   = UDim2.new(1, 0, 1, 0),
+			Position               = UDim2.new(1, -55, 0, 0),
+			BackgroundTransparency = Config.Notify.BackgroundTransparency,
+			AutomaticSize          = Enum.AutomaticSize.Y
+
 		}), {
-				MakeElement("Stroke", Color3.fromRGB(93, 93, 93), 1.2),
+				MakeElement("Stroke", Config.ColorSpace.Notify.Stroke, Config.Notify.StrokeSize),
 				MakeElement("Padding", 12, 12, 12, 12),
 
-				SetProps(MakeElement("Image", NotificationConfig.Image), {
-					Size = UDim2.new(0, 200, 0, 200);
-					Name = "Icon";
+				SetChildren(SetProps(MakeElement("Image", NotificationConfig.Image), {
+						Size     = UDim2.new(0, 25, 0, 25); 
+						Position = UDim2.new(0.015, 0, 0.015, 0);
+						Name     = "Icon";
+					}),
+
+					{ SetProps(MakeElement("Stroke", Config.ColorSpace.Notify.Stroke, Config.Notify.StrokeSize), {Name = "ImageStroke"}) }
+				);
+
+				SetProps(MakeElement("Frame", Config.ColorSpace.Notify.Stroke), {
+					Size            = UDim2.new(1, 0, 0, 2),
+					Position        = UDim2.new(0, 0, 0, 35),
+					BorderSizePixel = 0,
+					Name            = "Separator",
 				});
-				SetProps(MakeElement("Label", NotificationConfig.Name, 15), {
-					Size = UDim2.new(1, -30, 0, 20);
-					Position = UDim2.new(0, 30, 0, 0);
-					Font = Enum.Font.GothamBold;
-					Name = "Title";
-					TextColor3 = Color3.fromRGB(249, 232, 0);
+				
+				SetProps(MakeElement("Label", NotificationConfig.Name, 17.5), {
+					Size     = UDim2.new(1, -30, 0, 20);
+					Position = UDim2.new(0, 40, 0, 10);
+					Font     = Enum.Font.GothamBold;
+					Name     = "Title";
+					TextColor3 = Config.ColorSpace.Notify.Title
 				});
+
 				SetProps(MakeElement("Label", NotificationConfig.Content, 14), {
-					Size = UDim2.new(1, 0, 0, 0);
-					Position = UDim2.new(0, 0, 0, 25);
-					Font = Enum.Font.GothamSemibold;
-					Name = "Content";
+					Size          = UDim2.new(1, 0, 0, 0);
+					Position      = UDim2.new(0, 0, 0, 40);
+					Font          = Enum.Font.GothamSemibold;
+					Name          = "Content";
 					AutomaticSize = Enum.AutomaticSize.Y;
-					TextColor3 = Color3.fromRGB(200, 200, 200);
-					TextWrapped = true;
+					TextColor3    = Config.ColorSpace.Notify.Content;
+					TextWrapped   = true;
 				});
 			}
 		)
@@ -454,6 +498,7 @@ function StarWare_Lib:MakeNotification(NotificationConfig)
 
 		TweenService:Create(NotificationFrame.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 0.9}    ):Play()
 		TweenService:Create(NotificationFrame.Title,    TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.4}):Play()
+		TweenService:Create(NotificationFrame.Separator,TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency     = 0.4}):Play()
 		TweenService:Create(NotificationFrame.Content,  TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.5}):Play()
 
 		task.wait(0.05)
@@ -726,6 +771,7 @@ function StarWare_Lib:MakeWindow(WindowConfig)
 
 	local function LoadSequence()
 		MainWindow.Visible = false
+		StarWare_Lib:MakeNotification("UI-INIT")
 		local LoadSequenceLogo = SetProps(MakeElement("Image", WindowConfig.IntroIcon), {
 			Parent      = StarWare_Instance;
 			AnchorPoint = Vector2.new(0.5, 0.5);
@@ -1701,7 +1747,7 @@ function StarWare_Lib:MakeWindow(WindowConfig)
 
 			local SectionFunction = {}
 			for i, v in next, GetElements(SectionFrame.Holder) do
-				SectionFunction[i] = v 
+				SectionFunction[i] = v
 			end
 			return SectionFunction
 		end	
@@ -1713,7 +1759,7 @@ function StarWare_Lib:MakeWindow(WindowConfig)
 		if TabConfig.PremiumOnly then
 			for i, v in next, ElementFunction do
 				ElementFunction[i] = function() end
-			end    
+			end
 			Container:FindFirstChild("UIListLayout"):Destroy()
 			Container:FindFirstChild("UIPadding"):Destroy()
 			SetChildren(SetProps(MakeElement("TFrame"), {
@@ -1757,4 +1803,9 @@ function StarWare_Lib:Destroy()
 	StarWare_Instance:Destroy()
 end
 
-return StarWare_Lib
+
+if not DevMode then
+	return StarWare_Lib
+else
+	StarWare_Lib:MakeWindow()
+end
