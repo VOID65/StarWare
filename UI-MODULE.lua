@@ -5,7 +5,7 @@ local LocalPlayer      = game:GetService("Players").LocalPlayer
 local Mouse            = LocalPlayer:GetMouse()
 local HttpService      = game:GetService("HttpService")
 local CoreGui          = game:GetService("CoreGui")
-local DevMode          = true
+local DevMode          = false
 
 local Config = {
     ScriptName = "StarWare";
