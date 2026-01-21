@@ -2,7 +2,7 @@
 
 return({
     j7=function(f,k)
-        (k)[0X5]=f.Q;
+        (k)[0X5]=f.Q
     end,
         
     t7=function(f,f,k,Y)
